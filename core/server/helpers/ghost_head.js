@@ -115,6 +115,10 @@ function getStructuredData(metaData) {
 
     if (metaData.coverImage) {
         metaData.card = 'summary_large_image';
+        if (metaData.coverImage.indexOf('https://') > -1) {
+            metaData.coverImageSecure = metaData.coverImage;
+            metaData.coverImage = metaData.coverImage.replace('https://','http://');
+        }
     }
 
     structuredData = {
@@ -124,6 +128,7 @@ function getStructuredData(metaData) {
         'og:description': metaData.metaDescription,
         'og:url': metaData.url,
         'og:image': metaData.coverImage,
+        'og:image:secure_url': metaData.coverImageSecure,
         'article:published_time': metaData.publishedDate,
         'article:modified_time': metaData.modifiedDate,
         'article:tag': metaData.tags,
